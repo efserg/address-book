@@ -42,13 +42,8 @@ public class MenuNavigator {
         if (contact == null) {
             System.out.println("Контакт с ID: " + id + " не найден.\n");
         } else {
-            boolean option = yesNoOption(
-                    "Пользователь с ID: " + id + " (\"" + contact.getName() + "\") найден и будет удален. \n"
-                            + "Вы уверены");
-            if (option) {
-                addressBook.removeContact(id);
-                System.out.println("Контакт с ID: " + id + " удален.\n");
-            }
+            addressBook.removeContact(id);
+            System.out.println("Контакт с ID: " + id + " удален.\n");
         }
     }
 
@@ -69,12 +64,8 @@ public class MenuNavigator {
 
         int existPos = addressBook.contains(contact);
         if (existPos >= 0) {
-            boolean option = yesNoOption("Пользователь \"" + name + "\" уже присутствует в списке контактов. \n"
-                    + "Обновить контакт в в соответствии с новыми данными");
-            if (option) {
-                addressBook.addContact(existPos, contact);
-                System.out.println("Контакт \"" + name + "\" обновлен.\n");
-            }
+            addressBook.addContact(existPos, contact);
+            System.out.println("Контакт \"" + name + "\" обновлен.\n");
         } else {
             addressBook.addContact(contact);
             System.out.println("Контакт \"" + name + "\" добавлен.\n");
@@ -82,11 +73,8 @@ public class MenuNavigator {
     }
 
     private void exit() {
-        boolean yesNoOption = yesNoOption("Работа программы будет завершена. \n"
-                + "Выйти, вы уверены");
-        if (yesNoOption) {
-            System.exit(0);
-        }
+        scanner.close();
+        System.exit(0);
     }
 
     private int selectMainMenu() {
@@ -111,11 +99,5 @@ public class MenuNavigator {
 
         }
         return option;
-    }
-
-    private boolean yesNoOption(String message) {
-        System.out.print(message + " (д/y - Да, н/n - Нет)? <н>: ");
-        String option = scanner.next().toLowerCase().trim();
-        return !option.isEmpty() && ("д".equals(option) || "y".equals(option));
     }
 }
